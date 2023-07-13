@@ -1,0 +1,35 @@
+<div class="card mt-5">
+  <div class="card-header">
+
+    <a routerLink="/agregar-empleado" class="btn btn-success" role="button">Nuevo Registro</a>
+  </div>
+  <div class="card-body">
+    <h3> Listado de Empleados</h3>
+    <div class="table-responsive">
+      <table class="table table-responsive table-striped table-hover table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Código</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Correo</th>
+            <th scope="col">Opciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let empleado of Empleados; let iControl=index">
+            <td>{{ empleado.id }}</td>
+            <td>{{ empleado.nombre }}</td>
+            <td>{{ empleado.correo}}</td>
+            <td>
+              <a routerLink="/editar-empleado/{{ empleado.id }}" class="btn  btn-sm btn-warning"
+                role="button">Editar</a>
+              <a class="btn btn-danger m-1 btn-sm" role="button"
+                (click)="borrarRegistro(empleado.id, iControl)">Eliminar</a>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+
+  </div>

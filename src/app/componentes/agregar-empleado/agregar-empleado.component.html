@@ -1,0 +1,21 @@
+<div class="card mt-5">
+  <div class="card-header">
+    Agregar Empleado
+  </div>
+  <div class="card-body">
+    <!-- Directiva de angular para el envio del formulario NgSubmit -->
+    <form ngNativeValidate (ngSubmit)="enviarDatos()" [formGroup]="formularioDeEmpleados">
+      <div class="mb-3">
+        <label for="nombre" class="form-label">Nombre</label>
+        <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Escriba el nombre"
+          aria-describedby="AyudaNombre" formControlName="nombre" required>
+      </div>
+      <div class="mb-3">
+        <label for="correo" class="form-label">Correo</label>
+        <input type="email" name="correo" id="correo" class="form-control" placeholder="Escriba el correo"
+          aria-describedby="AyudaCorreo" formControlName="correo" required>
+      </div>
+      <button type="submit" class="btn btn-success m-1">Agregar Empleado</button>
+      <button type="button" class="btn btn-primary m-1" routerLink="/listar-empleado">Cancelar</button>
+    </form>
+  </div>
