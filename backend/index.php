@@ -17,8 +17,9 @@ if (isset($_GET["consultar"])){
         $empleaados = mysqli_fetch_all($sqlEmpleaados,MYSQLI_ASSOC);
         echo json_encode($empleaados);
         exit();
+    }else{  
+        echo json_encode(["success"=>0]); 
     }
-    else{  echo json_encode(["success"=>0]); }
 }
 //borrar pero se le debe de enviar una clave ( para borrado )
 if (isset($_GET["borrar"])){
@@ -26,19 +27,19 @@ if (isset($_GET["borrar"])){
     if($sqlEmpleaados){
         echo json_encode(["success"=>1]);
         exit();
+    }else{  
+        echo json_encode(["success"=>0]); 
     }
-    else{  echo json_encode(["success"=>0]); }
 }
 //Inserta un nuevo registro y recepciona en método post los datos de nombre y correo
 if(isset($_GET["insertar"])){
     $data = json_decode(file_get_contents("php://input"));
     $nombre=$data->nombre;
     $correo=$data->correo;
-        if(($correo!="")&&($nombre!="")){
-            
-    $sqlEmpleaados = mysqli_query($conexionBD,"INSERT INTO empleados(nombre,correo) VALUES('$nombre','$correo') ");
-    echo json_encode(["success"=>1]);
-        }
+    if(($correo!="")&&($nombre!="")){            
+        $sqlEmpleaados = mysqli_query($conexionBD,"INSERT INTO empleados(nombre,correo) VALUES('$nombre','$correo') ");
+        echo json_encode(["success"=>1]);
+    }
     exit();
 }
 // Actualiza datos pero recepciona datos de nombre, correo y una clave para realizar la actualización
@@ -59,8 +60,9 @@ $sqlEmpleaados = mysqli_query($conexionBD,"SELECT * FROM empleados ");
 if(mysqli_num_rows($sqlEmpleaados) > 0){
     $empleaados = mysqli_fetch_all($sqlEmpleaados,MYSQLI_ASSOC);
     echo json_encode($empleaados);
+}else{ 
+    echo json_encode([["success"=>0]]); 
 }
-else{ echo json_encode([["success"=>0]]); }
 
 
 ?>
